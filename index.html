@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>TrustedAirbnbConnect</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <style>
+    
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="container row">
+      <a class="brand" href="#/">Coast Roost</a>
+      <button class="burger" aria-expanded="false" onclick="toggleMenu()">☰</button>
+      <nav id="nav" class="nav">
+        <a href="#/">Home</a>
+        <a href="#/listings">Listings</a>
+        <a href="#footer">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- HOME -->
+  <main id="home" data-route>
+    <section class="hero">
+      <div class="container hero-inner">
+        <span class="badge">Coastal stays • Clean • Minimal</span>
+        <h1 style="margin:0 0 .5rem;font-size:clamp(2rem,4vw,3.2rem);line-height:1.1">Find your next stay on the Coast</h1>
+        <p class="muted" style="margin:0 0 1rem;max-width:60ch">Search unique homes and coastal getaways—filter by price, location, and amenities.</p>
+        <form id="searchForm" class="search" onsubmit="event.preventDefault(); goSearch()">
+          <input id="qLocation" placeholder="Location (e.g. Mombasa)" />
+          <input id="qDates" placeholder="Dates (e.g. 2025-09-01 → 2025-09-05)" />
+          <select id="qGuests">
+            <option value="1">1 Guest</option>
+            <option value="2">2 Guests</option>
+            <option value="3">3 Guests</option>
+            <option value="4">4 Guests</option>
+            <option value="5">5 Guests</option>
+          </select>
+          <button type="submit">Search</button>
+        </form>
+      </div>
+    </section>
+
+    <section class="container">
+      <h2>Popular this week</h2>
+      <p class="muted">Handpicked spaces near the ocean.</p>
+      <div id="popularGrid" class="grid"></div>
+    </section>
+  </main>
+
+  <!-- LISTINGS -->
+  <section id="listings" class="container" data-route>
+    <div class="row-between" style="gap:1rem;flex-wrap:wrap">
+      <div>
+        <h2>Places to stay</h2>
+        <p id="resultsMeta" class="muted" style="margin-top:-.5rem"></p>
+      </div>
+      <div class="filters">
+        <select id="fType">
+          <option value="All">All types</option>
+          <option>Apartment</option>
+          <option>House</option>
+          <option>Studio</option>
+        </select>
+        <label class="chip">Max price $<span id="priceVal">250</span>
+          <input id="fPrice" type="range" min="30" max="250" value="250" style="vertical-align:middle;margin-left:.5rem" />
+        </label>
+        <select id="fSort">
+          <option value="relevant">Sort: Relevant</option>
+          <option value="price-asc">Price: Low → High</option>
+          <option value="price-desc">Price: High → Low</option>
+          <option value="rating">Rating</option>
+        </select>
+      </div>
+    </div>
+    <div id="cards" class="grid" style="margin-top:1rem"></div>
+  </section>
+
+  <!-- DETAILS -->
+  <section id="details" class="container" data-route>
+    <a href="#/listings" style="display:inline-block;margin:1rem 0 .5rem">← Back to listings</a>
+    <div class="row-between"><h2 id="dTitle">Title</h2><div class="rating" id="dRating">4.8★</div></div>
+    <p class="muted" id="dMeta"></p>
+    <div class="gallery" id="dGallery" style="margin:1rem 0"></div>
+    <div class="row-between" style="align-items:start;gap:1rem">
+      <div style="flex:2;min-width:0">
+        <h3>Amenities</h3>
+        <ul id="dAmenities" class="muted" style="display:grid;grid-template-columns:repeat(2,1fr);gap:.35rem;list-style:none;padding:0"></ul>
+        <h3 style="margin-top:1rem">About this place</h3>
+        <p id="dDesc" class="muted"></p>
+        <h3 style="margin-top:1rem">Location</h3>
+        <div id="map"></div>
+      </div>
+      <aside class="aside" style="flex:1;min-width:280px">
+        <div class="row-between"><div><span style="font-weight:800;font-size:1.25rem" id="dPrice">$0</span> <span class="muted">/ night</span></div></div>
+        <div style="display:grid;gap:.5rem;margin-top:.6rem">
+          <input id="bDates" placeholder="Dates (e.g. 2025-09-01 → 2025-09-03)" style="border:1px solid var(--ring);border-radius:12px;padding:.6rem"/>
+          <input id="bGuests" type="number" min="1" value="1" style="border:1px solid var(--ring);border-radius:12px;padding:.6rem"/>
+          <button onclick="goBook()" style="background:var(--brand);color:#fff;border:0;border-radius:12px;padding:.8rem 1rem;font-weight:700;cursor:pointer">Book</button>
+        </div>
+        <p class="muted" id="dFacts" style="margin-top:.6rem"></p>
+      </aside>
+    </div>
+  </section>
+
+  <!-- BOOKING -->
+  <section id="booking" class="container" data-route>
+    <a href="#/listings" style="display:inline-block;margin:1rem 0 .5rem">← Back to listings</a>
+    <h2>Confirm your booking</h2>
+    <div id="bCard" class="card" style="margin-top:1rem;max-width:700px">
+      <div class="row-between" style="gap:1rem">
+        <img id="bImg" alt="" style="width:180px;height:120px;object-fit:cover"/>
+        <div style="padding:1rem 1rem 1rem 0;flex:1">
+          <div id="bTitle" style="font-weight:700"></div>
+          <div id="bMeta" class="muted"></div>
+          <div id="bDatesMeta" class="muted" style="margin-top:.35rem"></div>
+        </div>
+      </div>
+      <div class="row-between" style="padding:0 1rem 1rem">
+        <div><span style="font-weight:800" id="bTotal">Total: $0</span></div>
+        <button onclick="confirmBooking()" style="background:var(--brand);color:#fff;border:0;border-radius:12px;padding:.7rem 1rem;font-weight:700;cursor:pointer">Confirm</button>
+      </div>
+    </div>
+    <div id="bSuccess" class="chip" style="display:none;margin-top:1rem;border-color:#bbf7d0;background:#ecfdf5;color:#065f46">✅ Booking confirmed! (Demo)</div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div id="footer" class="container footer-inner">
+      <p class="muted">© <span id="year"></span> Coast Roost. All rights reserved.</p>
+      <div class="muted" style="display:flex;gap:.8rem">
+        <a href="#">Instagram</a>
+        <a href="#">Twitter</a>
+        <a href="#">Facebook</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="bnb.js">
+  
+  </script>
+</body>
+</html>
