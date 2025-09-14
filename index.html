@@ -9,6 +9,10 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://kit.fontawesome.com/b4ee2530db.js" crossorigin="anonymous"></script>
+  <!-- date picker -flatpickr -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
   <style>
     
   </style>
@@ -17,8 +21,10 @@
   <!-- Header -->
   <header class="header">
     <div class="container row">
-      <a class="brand" href="#/">Coast Roost</a>
-      <button class="burger" aria-expanded="false" onclick="toggleMenu()">☰</button>
+      <a class="brand" href="#/">AirbnbConnect.</a>
+      <button class="burger" aria-expanded="false" onclick="toggleMenu()"><i class="fa-solid fa-bars"></i>
+      <i class="fa-solid fa-square-xmark"></i>
+      </button>
       <nav id="nav" class="nav">
         <a href="#/">Home</a>
         <a href="#/listings">Listings</a>
@@ -31,12 +37,19 @@
   <main id="home" data-route>
     <section class="hero">
       <div class="container hero-inner">
-        <span class="badge">Coastal stays • Clean • Minimal</span>
-        <h1 style="margin:0 0 .5rem;font-size:clamp(2rem,4vw,3.2rem);line-height:1.1">Find your next stay on the Coast</h1>
-        <p class="muted" style="margin:0 0 1rem;max-width:60ch">Search unique homes and coastal getaways—filter by price, location, and amenities.</p>
+        <span class="badge">Coastal stays • City Comfort• villas</span>
+        <h1 style="margin:0 0 .5rem;font-size:clamp(2rem,4vw,3.2rem);line-height:1.1">Your Trusted Link to the Best Airbnb Homes Across Kenya</h1>
+        <p class="muted" style="margin:0 0 1rem;max-width:60ch">Browse verified studios,Bedrooms, and villas at the best rates. Book in minutes, stay with confidence</p>
         <form id="searchForm" class="search" onsubmit="event.preventDefault(); goSearch()">
-          <input id="qLocation" placeholder="Location (e.g. Mombasa)" />
-          <input id="qDates" placeholder="Dates (e.g. 2025-09-01 → 2025-09-05)" />
+          <select id="qLocation" >
+            <option value="1"><span>Mombasa</span> - Bamburi Nyali Buxton Tudor CBD Shanzu</option>
+            <option value="2"><span>Nairobi</span> - Kilimani Ngong Syokimau South B/C Kileleshwa</option>
+            <option value="3"><span>Nakuru</span></option>
+            <option value="4"><span>Naivasha</span></option>
+            <option value="5"><span>Kilifi -Mtwapa</span></option>
+            <option value="6"><span>South-coast/Kwale</span> - Diani Ukunda </option>
+          </select>
+           <input type="text" id="dates" placeholder="Select dates">
           <select id="qGuests">
             <option value="1">1 Guest</option>
             <option value="2">2 Guests</option>
@@ -53,6 +66,17 @@
       <h2>Popular this week</h2>
       <p class="muted">Handpicked spaces near the ocean.</p>
       <div id="popularGrid" class="grid"></div>
+    </section>
+    <section class="container">
+      <h2>Discounted Listings</h2>
+      <p>This months discounted stays</p>
+      <div id="popularGrid" class="grid"></div>
+    </section>
+    <section class="container">
+      <h2>Popular Villas</h2>
+      <p>Serene private Homes.Soft life</p>
+      <div id="popularGrid" class="grid"></div>
+
     </section>
   </main>
 
@@ -108,7 +132,7 @@
         </div>
         <p class="muted" id="dFacts" style="margin-top:.6rem"></p>
       </aside>
-    </div>
+    </div>``
   </section>
 
   <!-- BOOKING -->

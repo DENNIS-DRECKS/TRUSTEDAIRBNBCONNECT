@@ -1,5 +1,9 @@
 :root {
-  --bg: #f8fafc;
+  --bg: #f9fafb;
+  --header:#0F172A;
+  --accent:#EAB308;
+  --secondary-acc:#14B8A6;
+  --cta:#f97316;
   --card: #ffffff;
   --ink: #0f172a;
   --muted: #475569;
@@ -46,10 +50,10 @@ button {
 
 /* Header */
 .header {
-  position: sticky;
-  top: 0;
+  position:fixed;
+  width: 100%;
   z-index: 50;
-  background: rgba(255, 255, 255, 0.7);
+  background: var(--header);
   backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--ring);
 }
@@ -62,7 +66,15 @@ button {
 }
 .brand {
   font-weight: 800;
-  letter-spacing: 0.3px;
+  font-size: 1.9rem;
+  color: rgb(10, 101, 161);
+  letter-spacing: -4px;
+  text-shadow: 2px 0px 3px rgba(255, 255, 255, 0.651);
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; 
+
+
+  
+  
 }
 .nav {
   display: flex;
@@ -70,11 +82,14 @@ button {
   align-items: center;
 }
 .nav a {
-  padding: 0.45rem 0.7rem;
+  padding: 0.45rem 0.9rem;
+  font-weight: 500;
+  font-size: 1.3rem;
+  color: #fff;
   border-radius: 10px;
 }
 .nav a:hover {
-  background: #00000010;
+  background: var(--cta);
 }
 .burger {
   display: none;
@@ -82,6 +97,8 @@ button {
   border: 1px solid var(--ring);
   padding: 0.45rem 0.6rem;
   border-radius: 12px;
+  color: #fff;
+  font-size: 1.3rem;
 }
 
 @media (max-width: 860px) {
@@ -90,19 +107,30 @@ button {
   }
   .nav {
     position: fixed;
-    inset: 64px 1rem auto 1rem;
-    background: #fff;
+    inset: 70px 0rem auto 0;
+    background: var(--header);
     border: 1px solid var(--ring);
     border-radius: 14px;
     display: grid;
     gap: 0.6rem;
-    padding: 0.8rem;
+   
+    padding: 1.6rem;
     transform-origin: top right;
     transform: scale(0.96);
     opacity: 0;
     pointer-events: none;
     box-shadow: var(--shadow);
   }
+  .nav a{
+    color: var(--accent);
+    text-align: center;
+    font-size: 1.8rem;
+    background-color: rgba(255, 255, 255, 0.212);
+
+  }
+  .nav a:hover {
+  background:var(--bg);
+}
   .nav.open {
     transform: scale(1);
     opacity: 1;
@@ -292,7 +320,7 @@ h2 {
 /* Footer */
 footer {
   border-top: 1px solid var(--ring);
-  background: #fff;
+  background:var(--header);
 }
 .footer-inner {
   display: flex;
