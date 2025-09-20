@@ -1,4 +1,4 @@
-import {PROPS} from "./property.js"; 
+import { PROPS } from "./property.js";
 
 // ------- Simple Router (hash-based) -------
 const routes = {
@@ -39,10 +39,8 @@ function toggleMenu() {
   document
     .querySelector(".burger")
     .setAttribute("aria-expanded", nav.classList.contains("open"));
-    if(nav.classList.contains('open')){
-      
-    }
-    
+  if (nav.classList.contains("open")) {
+  }
 }
 window.toggleMenu = toggleMenu;
 
@@ -228,9 +226,8 @@ parseHash();
 
 // date flatpickr
 
-  flatpickr("#dates", {
-    mode: "range",          // allows selecting check-in & check-out
-    dateFormat: "Y-m-d",    // format like 2025-09-12
-    minDate: "today",       // no past dates
-  });
-
+flatpickr("#dates", {
+  mode: "range", // allows selecting check-in & check-out
+  dateFormat: "Y-m-d", // format like 2025-09-12
+  minDate: "today", // no past dates
+});

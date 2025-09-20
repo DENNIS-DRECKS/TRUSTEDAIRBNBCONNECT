@@ -210,6 +210,7 @@ section {
 }
 h2 {
   margin: 0.2rem 0 1rem;
+  color: var(--accent);
   font-size: clamp(1.4rem, 3vw, 2.1rem);
 }
 .muted {
@@ -320,17 +321,75 @@ h2 {
 /* Footer */
 footer {
   border-top: 1px solid var(--ring);
-  /* background:var(--header); */
+  background:var(--header); 
 }
 .footer-inner {
   display: flex;
-  gap: 10px;
-  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  color: #fff;
   
+
 }
 .footer-inner div{
-  flex-basis: 300px;
+  flex: 1 1 1 1 1 ;
+  
 }
+.footer-inner h3{
+  font-size:1.3rem ;
+  color: var(--accent);
+
+}
+#footer.container{
+  width: 1400px;
+  
+
+}
+.footer-inner .services li{
+  margin: 10px 0;
+  color: #f9fafb;
+  font-size: 1.1rem;
+
+
+}
+.footer-inner .Quick-links li{
+  list-style-type:none;
+  font-size: 1.2rem;
+  margin:20px 0px;
+  font-weight: 500;
+}
+.footer-inner .Quick-links{
+  flex-basis: 150px;
+}
+.footer-inner .Quick-links li:hover{
+  color: var(--cta);
+}
+.footer-inner .media-account li{
+  list-style-type: none;
+  font-size: 1.3rem;
+  margin: 20px 0px;
+  font-weight: bold;
+
+
+}
+.footer-inner .media-account{
+  flex-basis: 200px;
+}
+.footer-inner .media-account li:hover{
+  color: var(--cta);
+}
+
+@media (max-width:860px){
+  .footer-inner{
+    flex-direction: column;
+    width: 768px;
+  }
+ 
+
+
+
+}
+
 
 /* Simple router visibility */
 [data-route] {
