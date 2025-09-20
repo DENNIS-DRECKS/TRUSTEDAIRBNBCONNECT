@@ -121,7 +121,7 @@ function cardHTML(p) {
               <div class="rating">${p.rating}★</div>
             </div>
             <div class="muted">${p.location} • ${p.type}</div>
-            <div style="margin-top:.5rem;font-weight:700">$${p.price}<span class="muted" style="font-weight:500"> / night</span></div>
+            <div style="margin-top:.5rem;font-weight:700">Kshs${p.price}<span class="muted" style="font-weight:500"> / night</span></div>
           </div>
         </a>`;
 }
